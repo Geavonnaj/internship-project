@@ -4,12 +4,12 @@ from selenium.webdriver.support import expected_conditions as ec
 class Page:
     def __init__(self, driver):
             self.driver = driver
-            self.wait = WebDriverWait(driver, 15)
+            self.wait = WebDriverWait(driver, 20)
 
     def open_url(self, url):
             self.driver.get(url)
 
-    def click(self, *locator):
+    def clicks(self, *locator):
             self.driver.find_element(*locator).click()
 
     def input(self, text, *locator):
@@ -27,4 +27,8 @@ class Page:
           number_of_elements = self.driver.find_elements(*locator)
           return len(number_of_elements)
 
-
+    def wait_for_element_click(self, *locator):
+        self.wait.until(
+            ec.element_to_be_clickable(locator),
+            message=f'Element by {locator} not clickable'
+        ).click()
