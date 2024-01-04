@@ -7,6 +7,7 @@ from time import sleep
 
 class SecondaryPage(Page):
     FILTER_BUTTON = (By.CSS_SELECTOR, '[class="filter-button"]')
+    # FILTER_BUTTON = (By.CSS_SELECTOR, '[class="filter-text"]')
     WANT_TO_SELL_BUTTON = (By.CSS_SELECTOR, '[wized="ListingTypeSell"]')
     APPLY_FILTER_BUTTON = (By.CSS_SELECTOR, '[wized="applyFilterButtonMLS"]')
     FOR_SALE_TAG = (By.CSS_SELECTOR, '[wized="saleTagMLS"]')
@@ -29,9 +30,9 @@ class SecondaryPage(Page):
         # self.wait.until(ec.presence_of_element_located(self.WANT_TO_SELL_BUTTON)).click()
         # self.wait.until(ec.presence_of_element_located(self.APPLY_FILTER_BUTTON)).click()
 
-        # self.click(*self.FILTER_BUTTON)
-        # self.click(*self.WANT_TO_SELL_BUTTON)
-        # self.click(*self.APPLY_FILTER_BUTTON)
+        # self.clicks(*self.FILTER_BUTTON)
+        # self.clicks(*self.WANT_TO_SELL_BUTTON)
+        # self.clicks(*self.APPLY_FILTER_BUTTON)
 
     def verify_cards_tag(self):
         count_for_sale_tag = self.lens(*self.FOR_SALE_TAG)

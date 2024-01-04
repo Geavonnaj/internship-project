@@ -33,13 +33,21 @@ def browser_init(context, scenario_name):
     #     service=service
     # )
 
-    ### CHROME MOBILE EMULATION ###
-    # mobile_emulation = {"deviceName": "iPhone 14 Pro Max"}
-    # chrome_options = webdriver.ChromeOptions()
-    # chrome_options.add_experimental_option("mobileEmulation", mobile_emulation)
-    # driver = webdriver.Remote(command_executor='http://127.0.0.1:4444/wd/hub',
-    #                           desired_capabilities=chrome_options.to_capabilities())
+    ### CHROME MOBILE EMULATION ### (Noahs way)
+    mobile_emulation = {"deviceName": "iPhone 14 Pro Max"}
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_experimental_option("mobileEmulation", mobile_emulation)
+    context.driver = webdriver.Chrome(options=chrome_options)
+    context.driver.implicitly_wait(4)
+    context.driver.wait = WebDriverWait(context.driver, 25)
+    context.app = Application(context.driver)
 
+    # # - - - mobile emulation # #
+    # mobile_emulation = {"deviceName": "Samsung Galaxy S8+"}
+    # options = webdriver.ChromeOptions()
+    # options.add_experimental_option(name: "mobileEmulation", mobile_emulation)
+    # service = Service(
+    #     executable_path=r'C: \Users\A-FALAM\Careerist\python-selenium-automation\Internship June 2nd Batch\ Internship_reelly-(Nilufa)\chromedriver.exe')
 
     ### CHROME MOBILE EMULATION INDIVIDUAL DEVICE ATTRIBUTES ###
     # mobile_emulation = {
@@ -87,8 +95,8 @@ def browser_init(context, scenario_name):
     #
     # ### OBJECTS ###
     context.driver.wait = WebDriverWait(context.driver, 60)
-    # context.driver.maximize_window()
-    # context.driver.maximize_window()
+    context.driver.maximize_window()
+    context.driver.maximize_window()
     # context.driver.set_window_size(1280, 720)
     context.driver.implicitly_wait(10)
     context.app = Application(context.driver)

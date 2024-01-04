@@ -20,7 +20,7 @@ class SigninPage(Page):
         self.wait.until(ec.presence_of_element_located(self.PASSWORD_FIELD)).click()
         self.input(password, *self.PASSWORD_FIELD)
         self.wait.until(ec.presence_of_element_located(self.CONTINUE_BUTTON)).click()
-        self.driver.implicitly_wait(10)
+
 
 
         # self.input(email,*self.EMAIL_FIELD)

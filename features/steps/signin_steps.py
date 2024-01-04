@@ -11,4 +11,5 @@ def open_page(context):
 @when('Login to the page with {email} and {password}')
 def sign_in(context, email, password):
     context.app.signin_page.click_and_sign_in(email, password)
-    # sleep(5)
+    sleep(5)
+
