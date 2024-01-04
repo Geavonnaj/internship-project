@@ -13,14 +13,16 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 from app.application import Application
 
+
+
 def browser_init(context, scenario_name):
     """
     :param context: Behave context
     """
     ### CHROME ###
-    # driver_path = ChromeDriverManager().install()
-    # service = Service(driver_path)
-    # context.driver = webdriver.Chrome(service=service)
+    driver_path = ChromeDriverManager().install()
+    service = Service(driver_path)
+    context.driver = webdriver.Chrome(service=service)
 
     ### CHROME HEADLESS MODE ###
     # options = webdriver.ChromeOptions()
@@ -31,6 +33,22 @@ def browser_init(context, scenario_name):
     #     service=service
     # )
 
+    ### CHROME MOBILE EMULATION ###
+    # mobile_emulation = {"deviceName": "iPhone 14 Pro Max"}
+    # chrome_options = webdriver.ChromeOptions()
+    # chrome_options.add_experimental_option("mobileEmulation", mobile_emulation)
+    # driver = webdriver.Remote(command_executor='http://127.0.0.1:4444/wd/hub',
+    #                           desired_capabilities=chrome_options.to_capabilities())
+
+
+    ### CHROME MOBILE EMULATION INDIVIDUAL DEVICE ATTRIBUTES ###
+    # mobile_emulation = {
+    #     "deviceMetrics": {"width": 360, "height": 640, "pixelRatio": 3.0},
+    #     "userAgent": "Mozilla/5.0 (Linux; Android 4.2.1; en-us; Nexus 5 Build/JOP40D) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.166 Mobile Safari/535.19",
+    #     "clientHints": {"platform": "Android", "mobile": True}}
+    # chrome_options = Options()
+    # chrome_options.add_experimental_option("mobileEmulation", mobile_emulation)
+    # driver = webdriver.Chrome(chrome_options=chrome_options)
 
     ### SAFARI ###
     # context.driver = webdriver.Safari()
@@ -46,34 +64,34 @@ def browser_init(context, scenario_name):
     # options.headless = True
     # options.add_argument("--window-size=1920,1080")
     # driver = webdriver.Firefox(executable_path=GeckoDriverManager().install(), options=options)
+    # driver = webdriver.Firefox(executable_path='/Users/peggyadams/Desktop/internship-project/geckodriver', options=options)
     # driver.implicitly_wait(10)
 
 
     ### BROWSERSTACK ###
     # Register for BrowserStack, then grab it from https://www.browserstack.com/accounts/settings
-    bs_user = 'geavonna_HPsZqO'
-    bs_key = 'MVsGzym7mATionLB7Roi'
-    url = f'http://{bs_user}:{bs_key}@hub-cloud.browserstack.com/wd/hub'
-
-    options = Options()
-    bstack_options = {
-        'os': 'Windows',
-        'osVersion': '10',
-        'browserName': 'Firefox',
-        'sessionName': scenario_name
-    }
-    options.set_capability('bstack:options', bstack_options)
-    context.driver = webdriver.Remote(command_executor=url, options=options)
-
-
-    ### OBJECTS ###
+    # bs_user = 'geavonna_HPsZqO'
+    # bs_key = 'MVsGzym7mATionLB7Roi'
+    # url = f'http://{bs_user}:{bs_key}@hub-cloud.browserstack.com/wd/hub'
+    #
+    # options = Options()
+    # bstack_options = {
+    #     'os': 'Windows',
+    #     'osVersion': '10',
+    #     'browserName': 'Firefox',
+    #     'sessionName': scenario_name
+    # }
+    # options.set_capability('bstack:options', bstack_options)
+    # context.driver = webdriver.Remote(command_executor=url, options=options)
+    #
+    #
+    # ### OBJECTS ###
     context.driver.wait = WebDriverWait(context.driver, 60)
-    context.driver.maximize_window()
-    context.driver.maximize_window()
+    # context.driver.maximize_window()
+    # context.driver.maximize_window()
     # context.driver.set_window_size(1280, 720)
     context.driver.implicitly_wait(10)
     context.app = Application(context.driver)
-
 
 
 def before_scenario(context, scenario):
